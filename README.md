@@ -1,10 +1,13 @@
-## Playing with Docker
+## Datascience in a container
 
-I build a custom docker image based off miniconda3 (debian). What you'll find:
+![](/images/header.png)
+
+I build a custom docker image based off [miniconda3](https://hub.docker.com/r/continuumio/miniconda3) (Debian). What you'll find:
+
 - Dockerfile definition
 - Use of docker-compose to create the service `dockermvp`
 - Use of volume binds
-- Customization of zsh with powerlevel10k (for fun)
+- Zsh shell with [powerlevel10k](https://github.com/romkatv/powerlevel10k) (for fun)
 - Ready to install python dependencies via `pip` (from conda) or `conda install`
 
 ## Content
@@ -17,8 +20,37 @@ I build a custom docker image based off miniconda3 (debian). What you'll find:
 │   └── requirements.txt
 ├── Dockerfile.local
 ├── docker-compose.yml
-└── init.sh  # The entry point for `docker-compose up` (This is where you would launch a web server...)
+└── init.sh
 ```
+
+**docker-compose.yml**
+
+I define a single service with no dependencies and no external volumes in a simple docker-compose yaml file:
+
+```yaml
+version: "3.7"
+services:
+  dockermvp:
+    image: dockermvp:local
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    container_name: docker-mvp
+    entrypoint:
+    ports:
+    volumes:
+```
+[services](https://docs.docker.com/compose/compose-file/#service-configuration-reference)
+[image](https://docs.docker.com/compose/compose-file/#image)
+[context](https://docs.docker.com/compose/compose-file/#context)
+[dockerfile](https://docs.docker.com/compose/compose-file/#dockerfile)
+[entrypoint](https://docs.docker.com/compose/compose-file/#entrypoint)
+[ports](https://docs.docker.com/compose/compose-file/#short-syntax-1)
+[volumes](https://docs.docker.com/compose/compose-file/#volumes)
+
+
+**init.sh**
+The entry point for `docker-compose up` (This is where you would launch a web server...)
 
 ## Try it out
 
@@ -33,6 +65,6 @@ To launch a zsh shell in the newly created service:
 
 `dcomp exec dockermvp zsh`
 
-This is what you should see:
+You should see something similar to this:
 
-![](README-771af.png)
+![](./images/zsh-screenshot.png)

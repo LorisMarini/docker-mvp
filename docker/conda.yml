@@ -1,0 +1,7 @@
+name: dockermvp
+channels:
+  - conda-forge
+  - anaconda
+
+dependencies:
+  - nomkl # Reduces the size of the Docker image https://jcristharif.com/conda-docker-tips.html

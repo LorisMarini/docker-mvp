@@ -1,0 +1,58 @@
+FROM continuumio/miniconda3:4.8.2 as base
+
+# Adds metadata to the image as a key value pair example LABEL version="1.0"
+LABEL maintainer="Loris Marini"
+LABEL version="1.0"
+
+##Set environment variables
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+
+RUN apt-get update --fix-missing && apt-get install -y \
+    wget \
+    bzip2 \
+    ca-certificates \
+    build-essential \
+    curl \
+    git-core \
+    htop \
+    unzip \
+    zsh \
+    vim && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Prepare ssh to talk to github
+RUN mkdir "/root/.ssh" && \
+    touch "/root/.ssh/known_hosts" && \
+    ssh-keyscan github.com >> "/root/.ssh/known_hosts"
+
+# Add project directory
+RUN mkdir -p /code
+
+# Copy the content in the base directory to /code
+COPY ./docker /code/docker
+
+# Install python packages
+RUN /opt/conda/bin/pip install -r "/code/docker/requirements.txt"
+
+# Install conda dependencies for layer one
+RUN /opt/conda/bin/conda env update -n "base" --file "/code/docker/conda.yml" --verbose
+
+RUN sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && \
+  mkdir /root/.oh-my-zsh/themes/powerlevel10k && \
+  git clone https://github.com/romkatv/powerlevel10k.git /root/.oh-my-zsh/themes/powerlevel10k
+
+COPY ./.p10k.zsh /root/.p10k.zsh
+
+RUN echo "\n\
+plugins=(\n z \n git \n ) \n\
+ZSH_THEME='powerlevel10k/powerlevel10k' \n\
+export TERM=xterm-256color \n\
+source /root/.p10k.zsh \n\
+source /root/.oh-my-zsh/oh-my-zsh.sh" >> ~/.zshrc
+
+# Define working directory
+WORKDIR /code
+
+# Keep container up
+CMD ["tail", "-f", "/bin/zsh"]

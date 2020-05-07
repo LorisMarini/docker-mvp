@@ -1,6 +1,7 @@
 ## Datascience in a container
 
 ![](/images/header.png)
+(Image: [ClipartEmail](https://www.clipart.email/clipart/data-scientist-clipart-39833.html), [Kdnuggets](https://www.kdnuggets.com/2018/08/data-scientist-guide-getting-started-docker.html))
 
 I build a custom docker image based off [miniconda3](https://hub.docker.com/r/continuumio/miniconda3) (Debian). What you'll find:
 
@@ -25,7 +26,7 @@ I build a custom docker image based off [miniconda3](https://hub.docker.com/r/co
 
 **docker-compose.yml**
 
-I define a single service with no dependencies and no external volumes in a simple docker-compose yaml file:
+This is where we define a single service with no dependencies and no external volumes in a simple docker-compose yaml file:
 
 ```yaml
 version: "3.7"
@@ -68,3 +69,8 @@ To launch a zsh shell in the newly created service:
 You should see something similar to this:
 
 ![](./images/zsh-screenshot.png)
+
+## More Reads
+- [Mark Takacs Tutorial](https://takacsmark.com/docker-compose-tutorial-beginners-by-example-basics/)
+- [Difference between loggin order in zsh and bash](https://medium.com/@rajsek/zsh-bash-startup-files-loading-order-bashrc-zshrc-etc-e30045652f2e)
+- [Difference between docker-compose up, run and exec](https://medium.com/@zhao.li/how-to-understand-the-difference-between-docker-composes-up-vs-run-vs-exec-commands-a506151967df)

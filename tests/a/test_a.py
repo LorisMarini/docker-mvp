@@ -1,6 +1,5 @@
-import dockermvp
-
-from dockermvp.a.a_code import *
+import pytest
+from dockermvp.a.a_code import hello_world
 
 def test_hello_world():
 

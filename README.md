@@ -86,6 +86,18 @@ Greetings("loris")
 >> Hi loris!
 ```
 
+We can also run our tests from outside the container (ctrl+d to kill it):
+
+`./test.sh`
+
+![](/images/test-example.png)
+
+And open the coverage report in the browser
+
+`open ./tests/pytest-coverage/index.html`
+
+![](/images/coverage-report.png)
+
 ## More Reads
 - [Mark Takacs Tutorial](https://takacsmark.com/docker-compose-tutorial-beginners-by-example-basics/)
 - [Difference between loggin order in zsh and bash](https://medium.com/@rajsek/zsh-bash-startup-files-loading-order-bashrc-zshrc-etc-e30045652f2e)

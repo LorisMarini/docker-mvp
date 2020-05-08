@@ -30,13 +30,13 @@ RUN mkdir "/root/.ssh" && \
 RUN mkdir -p /code
 
 # Copy the content in the base directory to /code
-COPY ./docker /code/docker
+COPY ./dependencies /code/dependencies
 
 # Install python packages
-RUN /opt/conda/bin/pip install -r "/code/docker/requirements.txt"
+RUN /opt/conda/bin/pip install -r "/code/dependencies/requirements.txt"
 
 # Install conda dependencies for layer one
-RUN /opt/conda/bin/conda env update -n "base" --file "/code/docker/conda.yml" --verbose
+RUN /opt/conda/bin/conda env update -n "base" --file "/code/dependencies/conda.yml" --verbose
 
 RUN sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" && \
   mkdir /root/.oh-my-zsh/themes/powerlevel10k && \

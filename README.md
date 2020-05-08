@@ -3,7 +3,7 @@
 ![](/images/header.png)
 (Image: [ClipartEmail](https://www.clipart.email/clipart/data-scientist-clipart-39833.html), [Kdnuggets](https://www.kdnuggets.com/2018/08/data-scientist-guide-getting-started-docker.html))
 
-I build a custom docker image based off [miniconda3](https://hub.docker.com/r/continuumio/miniconda3) (Debian). What you'll find:
+Example of how to build a custom docker image based off [miniconda3](https://hub.docker.com/r/continuumio/miniconda3) (Debian). What you'll find:
 
 - Dockerfile definition
 - Use of docker-compose to create the service `dockermvp`
@@ -69,6 +69,22 @@ To launch a zsh shell in the newly created service:
 You should see something similar to this:
 
 ![](./images/zsh-screenshot.png)
+
+Now we can install manually our python app:
+
+`cd ~/code && pip install -e .`
+
+Now let's launch IPython and try to import our modules:
+
+```Python
+from dockermvp.a.a_code import *
+
+HelloWorld()
+>> Hello World
+
+Greetings("loris")
+>> Hi loris!
+```
 
 ## More Reads
 - [Mark Takacs Tutorial](https://takacsmark.com/docker-compose-tutorial-beginners-by-example-basics/)

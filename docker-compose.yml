@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile.local
     container_name: docker-mvp
-    entrypoint: "/bin/zsh init.sh"
+    entrypoint: /bin/zsh /code/init.sh
     ports:
       # src:dest (src=port on container, dest=port on host machine)
       - "7741:7740" # Port for Jupyter notwbook

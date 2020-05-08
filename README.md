@@ -55,33 +55,26 @@ The entry point for `docker-compose up` (This is where you would launch a web se
 
 ## Try it out
 
-Clone and cd into this repository. To build the image locally:
+`Clone` and `cd` into this repository, then build the image with:
 
 `docker-compose build`
 
-To run service in the background:
+If you want to run the container in the background and try things out, use this command:
+
 `docker-compose up -d`
 
-To launch a zsh shell in the newly created service:
-
+then exec into the container and launch a new shell:
 `dcomp exec dockermvp zsh`
 
 You should see something similar to this:
-
 ![](./images/zsh-screenshot.png)
 
-Now we can install manually our python app:
-
-`cd ~/code && pip install -e .`
-
-Now let's launch IPython and try to import our modules:
+Note: If you omit the `-d` flag in `docker-compose up` you'll see the stdout of what is executed in init.sh, a useful way to debug issues. From within the container we can launch ipython and try to import our modules:
 
 ```Python
 from dockermvp.a.a_code import *
-
 HelloWorld()
 >> Hello World
-
 Greetings("loris")
 >> Hi loris!
 ```
@@ -99,6 +92,6 @@ And open the coverage report in the browser
 ![](/images/coverage-report.png)
 
 ## More Reads
-- [Mark Takacs Tutorial](https://takacsmark.com/docker-compose-tutorial-beginners-by-example-basics/)
-- [Difference between loggin order in zsh and bash](https://medium.com/@rajsek/zsh-bash-startup-files-loading-order-bashrc-zshrc-etc-e30045652f2e)
-- [Difference between docker-compose up, run and exec](https://medium.com/@zhao.li/how-to-understand-the-difference-between-docker-composes-up-vs-run-vs-exec-commands-a506151967df)
+- [Mark Takacs Docker Compose Tutorial](https://takacsmark.com/docker-compose-tutorial-beginners-by-example-basics/)
+- [Login order in zsh and bash](https://medium.com/@rajsek/zsh-bash-startup-files-loading-order-bashrc-zshrc-etc-e30045652f2e)
+- [Docker-compose up vs run vs exec](https://medium.com/@zhao.li/how-to-understand-the-difference-between-docker-composes-up-vs-run-vs-exec-commands-a506151967df)
